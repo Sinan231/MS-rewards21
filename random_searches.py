@@ -130,6 +130,31 @@ destinations = [
     "Mexico", "Canada", "Thailand", "Japan", "Italy", "France", "Spain", "Greece"
 ]
 
+FOOD_ITEMS = [
+    "chicken", "pasta", "salad", "soup", "rice", "bread", "pizza", "burger", "sandwich",
+    "smoothie", "breakfast", "dinner", "lunch", "dessert", "snack", "vegetables", "fruits"
+]
+
+ACTIVITIES = [
+    "exercise", "meditation", "yoga", "running", "walking", "swimming", "cycling", "reading",
+    "cooking", "painting", "writing", "gardening", "traveling", "sleeping", "working", "studying"
+]
+
+SOFTWARE = [
+    "Microsoft Office", "Adobe Photoshop", "VS Code", "Chrome", "Firefox", "Slack", "Zoom",
+    "Spotify", "Netflix", "Excel", "PowerPoint", "Word", "Photoshop", "Illustrator", "Premiere"
+]
+
+AREAS = [
+    "city", "town", "neighborhood", "district", "county", "state", "country", "region",
+    "area", "zone", "community", "suburb", "downtown", "uptown", "midtown", "riverside"
+]
+
+REGIONS = [
+    "north", "south", "east", "west", "northeast", "northwest", "southeast", "southwest",
+    "midwest", "west coast", "east coast", "central", "mountain", "pacific", "atlantic"
+]
+
 def get_trending_keywords():
     """
     Get a list of current trending keywords to make searches more realistic.
