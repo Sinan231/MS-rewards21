@@ -18,8 +18,17 @@ Automated system that fetches 10 top trending Google searches + 90 random web se
 
 1. **Python 3.8+** installed
 2. **Microsoft Edge browser** installed
-3. **User logged into Microsoft/Bing account** in Edge browser
-4. **SerpApi account** (free tier available)
+3. **Multiple Edge profiles** (if you have multiple Microsoft accounts)
+4. **Users logged into their respective Microsoft/Bing accounts** in Edge profiles
+5. **SerpApi account** (free tier available)
+
+### Edge Profile Setup
+
+To use multiple accounts, create separate Edge profiles:
+1. Open Edge browser
+2. Click profile icon (top right) → "Add profile"
+3. Sign into each Microsoft account in its own profile
+4. Name profiles clearly (e.g., "Personal", "Work", "Gaming")
 
 ## Quick Setup
 
