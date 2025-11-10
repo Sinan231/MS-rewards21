@@ -210,7 +210,9 @@ Sample searches: latest election news, how to learn python, weather forecast new
 ### Modify Settings
 
 Edit `config.py` to adjust:
-- `DEFAULT_SEARCH_LIMIT`: Number of searches (default: 100)
+- `DEFAULT_SEARCH_LIMIT`: Total number of searches (default: 100)
+- `TRENDING_SEARCHES_COUNT`: Number of trending searches (default: 10)
+- `RANDOM_SEARCHES_COUNT`: Number of random searches (default: 90)
 - `HUMAN_DELAY_MIN/MAX`: Random delay range (default: 2-5 seconds)
 - `BING_URL`: Bing search URL
 - Log file locations
