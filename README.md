@@ -61,6 +61,12 @@ python main.py
 
 ## Usage
 
+### Select Edge Profile
+```bash
+python main.py --profile
+```
+Shows detected Edge profiles and lets you select which account to use.
+
 ### Check Status
 ```bash
 python main.py
@@ -69,10 +75,10 @@ Shows last execution time and hours since last run.
 
 ### Run Search Batch
 ```bash
-# Interactive mode (shows status, asks for confirmation)
+# Interactive mode (shows status, asks for confirmation and profile)
 python main.py
 
-# Direct execution (no prompts)
+# Direct execution (no prompts, uses saved profile)
 python main.py --run
 
 # Custom number of searches
@@ -86,7 +92,7 @@ python main.py --status
 ```bash
 python main.py --test
 ```
-Tests API key and browser connection.
+Tests API key and browser connection with saved profile.
 
 ## Command Line Options
 
