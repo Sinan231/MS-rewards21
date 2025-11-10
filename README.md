@@ -123,11 +123,13 @@ Tests API key and browser connection with saved profile.
 ├── main.py                 # Main execution controller
 ├── google_trends.py        # Google Trends API integration
 ├── random_searches.py      # Random search query generator
+├── edge_profiles.py        # Edge profile detection and management
 ├── bing_automator.py       # Bing search automation
 ├── config.py              # Configuration management
 ├── requirements.txt        # Python dependencies
 ├── .env.example           # Environment variables template
 ├── .env                   # Your API key (create this)
+├── selected_edge_profile.txt # Saved profile preference
 ├── last_run.txt           # Timestamp of last execution
 ├── logs/
 │   ├── search_history.log  # All executed searches
