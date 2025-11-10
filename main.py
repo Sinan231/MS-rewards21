@@ -94,19 +94,20 @@ def display_status():
 
     print("=" * 50)
 
-def run_search_batch(limit=None, skip_prompt=False):
+def run_search_batch(limit=None, skip_prompt=False, use_mixed_searches=True):
     """
-    Execute the full search process: fetch trends and perform Bing searches.
+    Execute the full search process: fetch trends, random searches, and perform Bing searches.
 
     Args:
         limit (int): Number of searches to perform (default from config)
         skip_prompt (bool): Skip user confirmation prompts
+        use_mixed_searches (bool): Whether to use mixed trending+random or just trending
     """
     if limit is None:
         limit = Config.DEFAULT_SEARCH_LIMIT
 
     print(f"\n🚀 Starting Bing search automation with {limit} searches...")
-    print("This process will take approximately 2-5 minutes per 100 searches")
+    print("This will fetch trending searches + random web searches")
     print("Please ensure your Edge browser is logged into your Microsoft account\n")
 
     if not skip_prompt:
@@ -130,15 +131,25 @@ def run_search_batch(limit=None, skip_prompt=False):
             return False
         print("✅ Browser connection successful")
 
-        # Step 3: Fetch trending searches
-        print(f"📊 Fetching top {limit} trending searches from Google...")
-        search_terms = get_trending_searches(limit=limit)
+        # Step 3: Fetch search terms
+        if use_mixed_searches:
+            print(f"📊 Fetching {Config.TRENDING_SEARCHES_COUNT} trending + {Config.RANDOM_SEARCHES_COUNT} random searches...")
+            search_terms = get_mixed_searches(
+                trending_count=Config.TRENDING_SEARCHES_COUNT,
+                random_count=Config.RANDOM_SEARCHES_COUNT
+            )
+        else:
+            print(f"📊 Fetching top {limit} trending searches from Google...")
+            search_terms = get_trending_searches(limit=limit)
 
         if not search_terms:
-            print("❌ No trending searches found. Please check your internet connection.")
+            print("❌ No searches found. Please check your internet connection.")
             return False
 
-        print(f"✅ Successfully fetched {len(search_terms)} trending searches")
+        # Limit to requested amount
+        search_terms = search_terms[:limit]
+
+        print(f"✅ Successfully prepared {len(search_terms)} search terms")
         print(f"Sample searches: {', '.join(search_terms[:3])}...\n")
 
         # Step 4: Execute searches
