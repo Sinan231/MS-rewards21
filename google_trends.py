@@ -30,6 +30,9 @@ def get_trending_searches(api_key=None, limit=None, max_retries=3):
         if not api_key:
             raise ValueError("SerpApi key is required. Set SERPAPI_KEY environment variable.")
 
+    if limit is None:
+        limit = Config.TRENDING_SEARCHES_COUNT
+
     if limit > 100:
         limit = 100
 
