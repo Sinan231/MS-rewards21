@@ -102,6 +102,7 @@ Tests API key and browser connection.
 .
 ├── main.py                 # Main execution controller
 ├── google_trends.py        # Google Trends API integration
+├── random_searches.py      # Random search query generator
 ├── bing_automator.py       # Bing search automation
 ├── config.py              # Configuration management
 ├── requirements.txt        # Python dependencies
