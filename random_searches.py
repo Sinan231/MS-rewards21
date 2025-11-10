@@ -218,8 +218,11 @@ def generate_random_search():
             location=random.choice(LOCATIONS),
             destination=random.choice(destinations),
             city=random.choice(LOCATIONS),
-            area=random.choice(['region', 'zone', 'district']),
-            region=random.choice(['northeast', 'southwest', 'midwest', 'west coast'])
+            area=random.choice(AREAS),
+            region=random.choice(REGIONS),
+            food_item=random.choice(FOOD_ITEMS),
+            activity=random.choice(ACTIVITIES),
+            software=random.choice(SOFTWARE)
         )
 
     elif strategy == 'keyword':
