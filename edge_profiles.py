@@ -230,19 +230,31 @@ def test_profile_access(profile_path):
         if not os.path.exists(profile_path):
             return False, f"Profile directory not found: {profile_path}"
 
-        # Check for essential profile files
-        essential_files = ['Preferences', 'Cookies', 'Web Data']
+        # Check for essential profile files (more lenient - just check Preferences)
+        critical_files = ['Preferences']
         missing_files = []
 
-        for file_name in essential_files:
+        for file_name in critical_files:
             file_path = os.path.join(profile_path, file_name)
             if not os.path.exists(file_path):
                 missing_files.append(file_name)
 
         if missing_files:
-            return False, f"Profile missing essential files: {', '.join(missing_files)}"
+            return False, f"Profile missing critical files: {', '.join(missing_files)}"
 
-        return True, f"Profile accessible: {os.path.basename(profile_path)}"
+        # Check for common Edge profile files (optional - for info only)
+        optional_files = ['Cookies', 'Web Data', 'History', 'Login Data']
+        found_optional = []
+        for file_name in optional_files:
+            file_path = os.path.join(profile_path, file_name)
+            if os.path.exists(file_path):
+                found_optional.append(file_name)
+
+        profile_name = os.path.basename(profile_path)
+        if found_optional:
+            return True, f"Profile accessible: {profile_name} (found: {', '.join(found_optional)})"
+        else:
+            return True, f"Profile accessible: {profile_name} (minimal profile)"
 
     except Exception as e:
         return False, f"Error testing profile access: {str(e)}"
