@@ -83,7 +83,7 @@ Tests API key and browser connection.
 |--------|-------------|
 | `--run` | Run search batch without prompting |
 | `--status` | Show only status information |
-| `--limit N` | Number of searches to perform (default: 100) |
+| `--limit N` | Number of searches to perform (default: 100 total) |
 | `--test` | Test browser and API connection |
 
 ## How It Works
