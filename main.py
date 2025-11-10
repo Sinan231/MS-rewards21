@@ -271,6 +271,20 @@ Examples:
         sys.exit(1)
 
     # Handle different command modes
+    if args.profile:
+        print("👤 Edge Profile Selection:")
+        print("=" * 50)
+        selected_profile = select_edge_profile()
+        if selected_profile:
+            success, message = test_profile_access(selected_profile)
+            if success:
+                print(f"✅ Selected profile: {message}")
+                save_profile_preference(selected_profile)
+                print("💾 Profile preference saved for future use")
+            else:
+                print(f"❌ Profile test failed: {message}")
+        return
+
     if args.test:
         print("🧪 Testing system configuration...")
         print("\n1. Testing API key...")
@@ -281,7 +295,14 @@ Examples:
             sys.exit(1)
 
         print("\n2. Testing browser connection...")
-        if test_browser_connection():
+        # Load saved profile or use default
+        saved_profile = load_profile_preference()
+        if saved_profile:
+            print(f"Using saved profile for test...")
+        else:
+            print("Using default profile for test...")
+
+        if test_browser_connection(saved_profile):
             print("✅ Browser connection successful")
         else:
             print("❌ Browser connection failed")
