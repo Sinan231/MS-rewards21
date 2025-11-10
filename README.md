@@ -151,9 +151,33 @@ Hours since last run: 13.3
 
 🚀 Starting Bing search automation with 100 searches...
 This will fetch trending searches + random web searches
-Please ensure your Edge browser is logged into your Microsoft account
 
-Continue? (y/n): y
+👤 Edge Account Selection:
+==================================================
+
+🔍 Detected Microsoft Edge Profiles:
+============================================================
+  1. Personal Account
+     Path: C:\Users\User\AppData\Local\Microsoft\Edge\User Data\Profile 1
+
+  2. Work Email
+     Path: C:\Users\User\AppData\Local\Microsoft\Edge\User Data\Profile 2
+
+  3. Gaming Profile
+     Path: C:\Users\User\AppData\Local\Microsoft\Edge\User Data\Profile 3
+
+  0. Use default profile (automatic)
+============================================================
+
+Select Edge profile number (0-3): 1
+
+🔍 Testing profile access...
+✅ Profile accessible: Profile 1
+
+✅ Profile selected successfully
+Please ensure this Edge profile is logged into your Microsoft account
+
+Ready to continue with searches? (y/n): y
 
 📡 Validating SerpApi key...
 ✅ API key valid
