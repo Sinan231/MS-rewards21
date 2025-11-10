@@ -173,10 +173,11 @@ def run_search_batch(limit=None, skip_prompt=False, use_mixed_searches=True):
             return False
         print("✅ API key valid")
 
-        # Step 2: Test browser connection
+        # Step 2: Test browser connection with selected profile
         print("🌐 Testing browser connection...")
-        if not test_browser_connection():
+        if not test_browser_connection(profile_path):
             print("❌ Browser connection failed. Please ensure Edge browser is installed.")
+            print("   Make sure the selected profile exists and is accessible.")
             return False
         print("✅ Browser connection successful")
 
