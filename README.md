@@ -88,11 +88,13 @@ Tests API key and browser connection.
 
 ## How It Works
 
-1. **Fetch Trends**: Gets top trending searches from Google Trends API
-2. **Browser Setup**: Opens Edge using your existing profile (stays logged in)
-3. **Execute Searches**: Performs each search with realistic delays
-4. **Track Progress**: Shows real-time progress (1/100, 2/100, etc.)
-5. **Log Results**: Records all searches and outcomes
+1. **Fetch Trending Searches**: Gets top 10 trending searches from Google Trends API
+2. **Generate Random Searches**: Creates 90 realistic random search queries using templates and word banks
+3. **Mix & Shuffle**: Combines and randomizes the order of all searches
+4. **Browser Setup**: Opens Edge using your existing profile (stays logged in)
+5. **Execute Searches**: Performs each search with realistic delays
+6. **Track Progress**: Shows real-time progress (1/100, 2/100, etc.)
+7. **Log Results**: Records all searches and outcomes
 
 ## File Structure
 
