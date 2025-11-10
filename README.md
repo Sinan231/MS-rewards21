@@ -4,12 +4,13 @@ Automated system that fetches 10 top trending Google searches + 90 random web se
 
 ## Features
 
-- 🔍 **Automated Search**: Fetches trending searches from Google Trends
+- 🔍 **Mixed Search Strategy**: 10 trending Google searches + 90 realistic random web searches
 - 🤖 **Browser Automation**: Uses Selenium with Microsoft Edge for realistic search behavior
 - ⏰ **Manual Control**: You decide when to run each batch (tracks timing)
 - 📊 **Progress Tracking**: Real-time progress display and detailed logging
 - 🎯 **Human-like Behavior**: Random delays between searches (2-5 seconds)
 - 📝 **Complete Logging**: Search history and error tracking
+- 🎲 **Realistic Random Searches**: Generates diverse, natural-looking search queries
 
 ## Prerequisites
 
