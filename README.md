@@ -1,6 +1,6 @@
 # Bing Search Automation
 
-Automated system that fetches top 100 trending Google searches and executes them through your Bing account every 13-15 hours using browser automation.
+Automated system that fetches 10 top trending Google searches + 90 random web searches and executes them through your Bing account every 13-15 hours using browser automation.
 
 ## Features
 
