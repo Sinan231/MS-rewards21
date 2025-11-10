@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from google_trends import get_trending_searches, validate_api_key
 from random_searches import get_mixed_searches, get_random_searches
 from bing_automator import execute_search_batch, test_browser_connection
+from edge_profiles import select_edge_profile, load_profile_preference, save_profile_preference, test_profile_access
 from config import Config
 
 def get_last_run_time():
