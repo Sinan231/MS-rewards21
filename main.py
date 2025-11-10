@@ -246,6 +246,7 @@ Examples:
   %(prog)s --status        # Show only status
   %(prog)s --limit 10      # Run with 10 searches instead of default 100
   %(prog)s --test          # Test browser and API connection
+  %(prog)s --profile       # Show profile selection menu
         """
     )
 
@@ -257,6 +258,8 @@ Examples:
                        help=f'Number of searches to perform (default: {Config.DEFAULT_SEARCH_LIMIT})')
     parser.add_argument('--test', action='store_true',
                        help='Test browser and API connection')
+    parser.add_argument('--profile', action='store_true',
+                       help='Show Edge profile selection menu')
 
     args = parser.parse_args()
 
