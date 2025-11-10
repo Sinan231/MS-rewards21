@@ -187,14 +187,14 @@ def main():
     Main CLI interface for the Bing search automation tool.
     """
     parser = argparse.ArgumentParser(
-        description="Automated Bing search using trending Google searches",
+        description="Automated Bing search using trending Google searches + random web searches",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  %(prog)s                 # Show status and prompt to run
+  %(prog)s                 # Show status and prompt to run (10 trending + 90 random)
   %(prog)s --run           # Run search batch without prompting
   %(prog)s --status        # Show only status
-  %(prog)s --limit 10      # Run with 10 searches instead of default
+  %(prog)s --limit 10      # Run with 10 searches instead of default 100
   %(prog)s --test          # Test browser and API connection
         """
     )
