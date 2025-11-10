@@ -46,7 +46,7 @@ SEARCH_TEMPLATES = [
     "{product} discount codes",
 
     # Health and lifestyle
-    "healthy {food} recipes",
+    "healthy {food_item} recipes",
     "exercise for {fitness_goal}",
     "mental health tips for {situation}",
     "benefits of {activity}",
