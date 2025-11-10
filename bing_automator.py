@@ -39,44 +39,123 @@ def setup_browser(profile_path=None):
     Returns:
         webdriver.Edge: Configured Edge WebDriver instance
     """
+    driver = None
+    errors = []
+
+    options = webdriver.EdgeOptions()
+
+    # Use the specified profile
+    if profile_path and profile_path != "default":
+        user_data_dir = get_profile_user_data_dir(profile_path)
+        profile_dir = get_profile_directory_name(profile_path)
+
+        options.add_argument(f"--user-data-dir={user_data_dir}")
+        options.add_argument(f"--profile-directory={profile_dir}")
+
+        logging.info(f"Using Edge profile: {profile_dir}")
+    else:
+        # Use default profile
+        options.add_argument("--user-data-dir=default")
+        options.add_argument("--profile-directory=Default")
+        logging.info("Using default Edge profile")
+
+    # Additional options for stability
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+
+    # Try multiple approaches to setup the browser
+    approaches = [
+        ("Selenium Manager", lambda: webdriver.Edge(options=options)),
+    ]
+
+    # Try webdriver-manager as fallback
     try:
-        options = webdriver.EdgeOptions()
+        from webdriver_manager.microsoft import EdgeChromiumDriverManager
+        from selenium.webdriver.edge.service import Service
+        approaches.append(
+            ("WebDriver Manager",
+             lambda: webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()), options=options))
+        )
+    except ImportError:
+        logging.info("WebDriver manager not available")
 
-        # Use the specified profile
-        if profile_path and profile_path != "default":
-            user_data_dir = get_profile_user_data_dir(profile_path)
-            profile_dir = get_profile_directory_name(profile_path)
+    for approach_name, approach_func in approaches:
+        try:
+            logging.info(f"Trying browser setup with: {approach_name}")
+            driver = approach_func()
 
-            options.add_argument(f"--user-data-dir={user_data_dir}")
-            options.add_argument(f"--profile-directory={profile_dir}")
+            # Test if driver works
+            driver.current_url
+            logging.info(f"Browser setup successful with: {approach_name}")
+            break
 
-            logging.info(f"Using Edge profile: {profile_dir}")
-        else:
-            # Use default profile
-            options.add_argument("--user-data-dir=default")
-            options.add_argument("--profile-directory=Default")
-            logging.info("Using default Edge profile")
+        except Exception as e:
+            error_msg = f"{approach_name} failed: {str(e)}"
+            logging.warning(error_msg)
+            errors.append(error_msg)
+            if driver:
+                try:
+                    driver.quit()
+                except:
+                    pass
+                driver = None
 
-        # Additional options for stability
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--disable-blink-features=AutomationControlled")
-        options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        options.add_experimental_option('useAutomationExtension', False)
+    # If all approaches failed, try manual driver setup
+    if driver is None:
+        try:
+            logging.info("Trying manual EdgeDriver setup...")
+            from selenium.webdriver.edge.service import Service
 
-        # Use Edge's built-in WebDriver support (no webdriver-manager needed)
-        driver = webdriver.Edge(options=options)
+            # Try common EdgeDriver locations
+            driver_paths = [
+                "msedgedriver.exe",
+                "./msedgedriver.exe",
+                "C:\\Windows\\System32\\msedgedriver.exe",
+                "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedgedriver.exe",
+            ]
 
+            for driver_path in driver_paths:
+                if os.path.exists(driver_path):
+                    logging.info(f"Found EdgeDriver at: {driver_path}")
+                    service = Service(driver_path)
+                    driver = webdriver.Edge(service=service, options=options)
+                    break
+
+            if driver is None:
+                # If no local driver found, create one without service
+                driver = webdriver.Edge(options=options)
+
+            logging.info("Manual EdgeDriver setup successful")
+
+        except Exception as e:
+            error_msg = f"Manual setup failed: {str(e)}"
+            logging.error(error_msg)
+            errors.append(error_msg)
+
+    # Final check and setup
+    if driver is None:
+        error_details = "\n".join(errors)
+        raise Exception(f"All browser setup attempts failed. Details:\n{error_details}\n\n"
+                       "Please try installing EdgeDriver manually from:\n"
+                       "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/")
+
+    try:
         # Set page load timeout
         driver.set_page_load_timeout(30)
         driver.maximize_window()
-
         logging.info("Browser setup completed successfully")
         return driver
 
     except Exception as e:
-        error_logger.error(f"Failed to setup browser: {str(e)}")
-        raise Exception(f"Browser setup failed: {str(e)}")
+        if driver:
+            try:
+                driver.quit()
+            except:
+                pass
+        raise Exception(f"Browser configuration failed: {str(e)}")
 
 def human_delay():
     """
