@@ -204,9 +204,18 @@ Sample searches: latest election news, how to learn python, weather forecast new
 ## Browser Requirements
 
 - **Microsoft Edge** must be installed
-- **User must be logged into Microsoft/Bing account** in Edge
-- The automation uses your existing browser profile to maintain login state
+- **Multiple profiles** (if using multiple accounts)
+- **Users logged into Microsoft/Bing accounts** in their respective Edge profiles
+- The automation uses your selected browser profile to maintain login state
 - Browser will open/close automatically during execution
+
+## Profile Management
+
+- **Automatic Detection**: System detects all Edge profiles automatically
+- **Friendly Names**: Shows account names and emails for easy identification
+- **Saved Preference**: Remembers your selected profile for future runs
+- **Easy Switching**: Change profiles anytime with `--profile` option
+- **Profile Testing**: Verifies profile accessibility before running searches
 
 ## Timing Recommendations
 
