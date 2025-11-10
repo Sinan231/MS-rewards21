@@ -13,13 +13,13 @@ logging.basicConfig(
     ]
 )
 
-def get_trending_searches(api_key=None, limit=100, max_retries=3):
+def get_trending_searches(api_key=None, limit=None, max_retries=3):
     """
     Fetch trending search terms from Google Trends API.
 
     Args:
         api_key (str): SerpApi API key
-        limit (int): Number of search terms to fetch (max 100)
+        limit (int): Number of search terms to fetch (default: TRENDING_SEARCHES_COUNT)
         max_retries (int): Maximum number of retry attempts
 
     Returns:
