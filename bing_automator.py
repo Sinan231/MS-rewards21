@@ -1,6 +1,7 @@
 import time
 import random
 import logging
+import os
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -11,6 +12,10 @@ from selenium.webdriver.edge.service import Service
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from config import Config
 from edge_profiles import get_profile_user_data_dir, get_profile_directory_name
+
+# Ensure logs directory exists
+os.makedirs(os.path.dirname(Config.LOG_FILE), exist_ok=True)
+os.makedirs(os.path.dirname(Config.ERROR_LOG_FILE), exist_ok=True)
 
 # Set up logging for search history
 search_logger = logging.getLogger('search_history')
