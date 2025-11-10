@@ -109,10 +109,58 @@ def run_search_batch(limit=None, skip_prompt=False, use_mixed_searches=True):
 
     print(f"\n🚀 Starting Bing search automation with {limit} searches...")
     print("This will fetch trending searches + random web searches")
-    print("Please ensure your Edge browser is logged into your Microsoft account\n")
+
+    # Profile selection
+    print("\n👤 Edge Account Selection:")
+    print("=" * 50)
+
+    # Try to load saved preference first
+    saved_profile = load_profile_preference()
+    use_saved = False
+
+    if saved_profile:
+        try:
+            success, message = test_profile_access(saved_profile)
+            if success:
+                print(f"Found saved profile: {message}")
+                if not skip_prompt:
+                    use_saved_choice = input("Use saved profile? (y/n): ").strip().lower()
+                    if use_saved_choice == 'y':
+                        profile_path = saved_profile
+                        use_saved = True
+                        print("✅ Using saved profile")
+            else:
+                print(f"⚠️  Saved profile not accessible: {message}")
+        except Exception as e:
+            print(f"⚠️  Could not test saved profile: {e}")
+
+    # Select profile if not using saved one
+    if not use_saved:
+        profile_path = select_edge_profile()
+        if profile_path is None:
+            print("❌ No profile selected. Search batch cancelled.")
+            return False
+
+        # Test the selected profile
+        print("\n🔍 Testing profile access...")
+        success, message = test_profile_access(profile_path)
+        if success:
+            print(f"✅ {message}")
+            # Save preference for next time
+            save_profile_preference(profile_path)
+        else:
+            print(f"❌ {message}")
+            if not skip_prompt:
+                continue_choice = input("Continue anyway? (y/n): ").strip().lower()
+                if continue_choice != 'y':
+                    print("Search batch cancelled.")
+                    return False
+
+    print("✅ Profile selected successfully")
+    print("Please ensure this Edge profile is logged into your Microsoft account\n")
 
     if not skip_prompt:
-        confirm = input("Continue? (y/n): ").strip().lower()
+        confirm = input("Ready to continue with searches? (y/n): ").strip().lower()
         if confirm != 'y':
             print("Search batch cancelled.")
             return False
