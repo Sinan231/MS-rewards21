@@ -1,7 +1,11 @@
 import time
 import logging
+import os
 from serpapi import GoogleSearch
 from config import Config
+
+# Ensure logs directory exists
+os.makedirs(os.path.dirname(Config.ERROR_LOG_FILE), exist_ok=True)
 
 # Set up logging
 logging.basicConfig(
