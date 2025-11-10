@@ -145,12 +145,13 @@ def search_bing(driver, search_term):
         search_logger.info(f'ERROR | "{search_term}" | {str(e)}')
         return False, error_msg
 
-def execute_search_batch(search_terms):
+def execute_search_batch(search_terms, profile_path=None):
     """
     Execute a batch of searches on Bing.
 
     Args:
         search_terms (list): List of search terms to execute
+        profile_path (str): Path to Edge profile to use
 
     Returns:
         list: List of result dictionaries with term, success, message, and timestamp
@@ -166,7 +167,7 @@ def execute_search_batch(search_terms):
 
     try:
         logging.info(f"Starting search batch with {len(search_terms)} terms")
-        driver = setup_browser()
+        driver = setup_browser(profile_path)
 
         for i, term in enumerate(search_terms, 1):
             try:
