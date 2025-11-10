@@ -167,7 +167,7 @@ Sample searches: latest election news, how to learn python, weather forecast new
 - **Recommended interval**: 13-15 hours between batches
 - **Script tracks timing**: Shows hours since last execution
 - **Manual control**: You decide when to run each batch
-- **Duration**: ~3-5 minutes for 100 searches
+- **Duration**: ~3-5 minutes for 100 searches (10 trending + 90 random)
 
 ## Troubleshooting
 
