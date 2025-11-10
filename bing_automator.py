@@ -234,15 +234,18 @@ def execute_search_batch(search_terms, profile_path=None):
 
     return results
 
-def test_browser_connection():
+def test_browser_connection(profile_path=None):
     """
     Test if the browser can connect to Bing properly.
+
+    Args:
+        profile_path (str): Path to Edge profile to use
 
     Returns:
         bool: True if connection successful, False otherwise
     """
     try:
-        driver = setup_browser()
+        driver = setup_browser(profile_path)
         driver.get(Config.BING_URL)
 
         # Check if we can find the search box
