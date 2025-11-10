@@ -64,9 +64,8 @@ def setup_browser(profile_path=None):
         options.add_experimental_option("excludeSwitches", ["enable-automation"])
         options.add_experimental_option('useAutomationExtension', False)
 
-        # Auto-install and configure EdgeDriver
-        service = Service(EdgeChromiumDriverManager().install())
-        driver = webdriver.Edge(service=service, options=options)
+        # Use Edge's built-in WebDriver support (no webdriver-manager needed)
+        driver = webdriver.Edge(options=options)
 
         # Set page load timeout
         driver.set_page_load_timeout(30)
