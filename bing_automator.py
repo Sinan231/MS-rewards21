@@ -26,9 +26,12 @@ error_handler = logging.FileHandler(Config.ERROR_LOG_FILE)
 error_handler.setFormatter(logging.Formatter('%(asctime)s | %(levelname)s | %(funcName)s() | %(message)s'))
 error_logger.addHandler(error_handler)
 
-def setup_browser():
+def setup_browser(profile_path=None):
     """
-    Set up and configure the Edge browser with existing user profile.
+    Set up and configure the Edge browser with specified user profile.
+
+    Args:
+        profile_path (str): Path to the Edge profile to use
 
     Returns:
         webdriver.Edge: Configured Edge WebDriver instance
@@ -36,9 +39,20 @@ def setup_browser():
     try:
         options = webdriver.EdgeOptions()
 
-        # Use existing user data directory to stay logged in
-        options.add_argument("--user-data-dir=default")
-        options.add_argument("--profile-directory=Default")
+        # Use the specified profile
+        if profile_path and profile_path != "default":
+            user_data_dir = get_profile_user_data_dir(profile_path)
+            profile_dir = get_profile_directory_name(profile_path)
+
+            options.add_argument(f"--user-data-dir={user_data_dir}")
+            options.add_argument(f"--profile-directory={profile_dir}")
+
+            logging.info(f"Using Edge profile: {profile_dir}")
+        else:
+            # Use default profile
+            options.add_argument("--user-data-dir=default")
+            options.add_argument("--profile-directory=Default")
+            logging.info("Using default Edge profile")
 
         # Additional options for stability
         options.add_argument("--no-sandbox")
