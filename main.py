@@ -202,9 +202,9 @@ def run_search_batch(limit=None, skip_prompt=False, use_mixed_searches=True):
         print(f"✅ Successfully prepared {len(search_terms)} search terms")
         print(f"Sample searches: {', '.join(search_terms[:3])}...\n")
 
-        # Step 4: Execute searches
+        # Step 4: Execute searches with selected profile
         print("🔍 Starting Bing search automation...")
-        results = execute_search_batch(search_terms)
+        results = execute_search_batch(search_terms, profile_path)
 
         # Step 5: Display results summary
         successful = sum(1 for r in results if r['success'])
